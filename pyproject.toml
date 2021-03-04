@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "nautobot-docker"
+version = "0.1.0"
+description = "Production Nautobot Docker Container"
+authors = ["Jeremy White <jeremy.white@networktocode.com>"]
+license = "Apache2.0"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+nautobot = "v1.0.0b1"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,31 @@
+---
+version: "3"
+services:
+  nautobot:
+    image: "whitej6/nautobot:v1.0.0b1"
+    #command: "migrate"
+    command: "nautobot-server runserver 0.0.0.0:8000 --insecure"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - dev.env
+    tty: true
+  postgres:
+    image: postgres:10
+    env_file:
+      - dev.env
+    volumes:
+      - pgdata_nautobot:/var/lib/postgresql/data
+  redis:
+    image: redis:5-alpine
+    command:
+      - sh
+      - -c # this is to evaluate the $REDIS_PASSWORD from the env
+      - redis-server --appendonly yes --requirepass $$REDIS_PASSWORD ## $$ because of docker-compose
+    env_file:
+      - dev.env
+volumes:
+  pgdata_nautobot:
