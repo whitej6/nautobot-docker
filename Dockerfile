@@ -56,5 +56,7 @@ COPY nautobot_config.py uwsgi.ini entrypoint.sh ./
 
 ENV NAUTOBOT_CONFIG /opt/nautobot/nautobot_config.py
 
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ "nautobot-server", "check" ]
+
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["start", "--ini", "/opt/nautobot/uwsgi.ini"]

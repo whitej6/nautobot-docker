@@ -188,17 +188,6 @@ Django = ">=2.2"
 
 [[package]]
 category = "main"
-description = "Run checks on services like databases, queue servers, celery processes, etc."
-name = "django-health-check"
-optional = false
-python-versions = "*"
-version = "3.16.3"
-
-[package.dependencies]
-django = ">=1.11"
-
-[[package]]
-category = "main"
 description = "script tag with additional attributes for django.forms.Media"
 name = "django-js-asset"
 optional = false
@@ -846,7 +835,7 @@ secure = ["pyOpenSSL (>=0.14)", "cryptography (>=1.3.4)", "idna (>=2.0.0)", "cer
 socks = ["PySocks (>=1.5.6,<1.5.7 || >1.5.7,<2.0)"]
 
 [metadata]
-content-hash = "27dfa0747643542cda2ed63229ebda92267101b33fe69275fed70a118aa1996e"
+content-hash = "f3c4d6440dfe79ac0d78705627f9242b762200fd3c050ce53140ac85fce46ea9"
 python-versions = "^3.8"
 
 [metadata.files]
@@ -958,10 +947,6 @@ django-cryptography = [
 django-filter = [
     {file = "django-filter-2.4.0.tar.gz", hash = "sha256:84e9d5bb93f237e451db814ed422a3a625751cbc9968b484ecc74964a8696b06"},
     {file = "django_filter-2.4.0-py3-none-any.whl", hash = "sha256:e00d32cebdb3d54273c48f4f878f898dced8d5dfaad009438fe61ebdf535ace1"},
-]
-django-health-check = [
-    {file = "django-health-check-3.16.3.tar.gz", hash = "sha256:a6aa6ea423eae4fd0665f6372b826af1ed20dfc3e88cf52789d0b49cfb64969c"},
-    {file = "django_health_check-3.16.3-py2.py3-none-any.whl", hash = "sha256:d0628ffc11aee7e62e73b58ff39179ea2a9ca5abfbc92cb345ceca268593dd71"},
 ]
 django-js-asset = [
     {file = "django-js-asset-1.2.2.tar.gz", hash = "sha256:c163ae80d2e0b22d8fb598047cd0dcef31f81830e127cfecae278ad574167260"},

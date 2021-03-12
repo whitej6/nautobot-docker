@@ -26,10 +26,9 @@ REQUIRED_ENV_VARS = [
     "SECRET_KEY"
 ]
 
-if len(sys.argv) > 1 and sys.argv[1] == "start":
-    for i in REQUIRED_ENV_VARS:
-        if i not in os.environ:
-            raise ValueError(f"Missing required environment variable {i}.")
+for i in REQUIRED_ENV_VARS:
+    if i not in os.environ:
+        raise ValueError(f"Missing required environment variable {i}.")
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "*").split(" ")
 
@@ -47,7 +46,7 @@ DATABASES = {
 
 DEBUG = False
 
-LOG_LEVEL = "DEBUG" if DEBUG else "INFO"
+LOG_LEVEL = "INFO"
 
 LOGGING = {
     "version": 1,
@@ -77,11 +76,11 @@ LOGGING = {
     "loggers": {
         "django": {"handlers": ["normal_console"], "level": "INFO"},
         "nautobot": {
-            "handlers": ["verbose_console" if DEBUG else "normal_console"],
+            "handlers": ["normal_console"],
             "level": LOG_LEVEL,
         },
         "rq.worker": {
-            "handlers": ["verbose_console" if DEBUG else "normal_console"],
+            "handlers": ["normal_console"],
             "level": LOG_LEVEL,
         },
     },
@@ -112,8 +111,3 @@ CACHEOPS_REDIS = f"redis://:{os.getenv('REDIS_PASSWORD')}@{os.getenv('REDIS_HOST
 
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "notverysecure")
-
-# Django Debug Toolbar
-TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
-DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": lambda _request: DEBUG and not TESTING}
-HIDE_RESTRICTED_UI = os.environ.get("HIDE_RESTRICTED_UI", False)
