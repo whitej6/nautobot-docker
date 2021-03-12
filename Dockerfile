@@ -39,15 +39,22 @@ FROM python:3.8-slim as final
 
 RUN apt update && apt install -y git
 
-RUN groupadd -g 999 nautobot && \
-    useradd -u 999 -m -g nautobot nautobot
+RUN groupadd -g 1024 nautobot && \
+    useradd -u 1024 -m -g nautobot nautobot
 
 USER nautobot
 
 COPY --from=base /usr/local/lib/python3.8/site-packages /usr/local/lib/python3.8/site-packages
 COPY --from=base /usr/local/bin /usr/local/bin
+COPY --from=base /etc/mime.types /etc/mime.types
 
 WORKDIR /opt/nautobot
-COPY nautobot_config.py .
+
+RUN nautobot-server init
+
+COPY nautobot_config.py uwsgi.ini entrypoint.sh ./
 
 ENV NAUTOBOT_CONFIG /opt/nautobot/nautobot_config.py
+
+ENTRYPOINT ["./entrypoint.sh"]
+CMD ["start", "--ini", "/opt/nautobot/uwsgi.ini"]
